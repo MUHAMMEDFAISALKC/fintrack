@@ -1,0 +1,130 @@
+﻿@model Account.Models.CombinedAccount;
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.COA[0].AccCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.COA[0].Accname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.COA[0].ParentId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.COA[0].Acclevel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Voucher[0].cramt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Voucher[0].dramt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Balance)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.Status)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Accname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ParentId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Acclevel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cramt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dramt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Balance)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p> ------------------------------------------------------------------- </p>
+<div>
+
+    <thead>
+        <tr>
+            <th>Acc Code</th>
+            <th>Acc Name</th>
+            <th>Parent Id</th>
+            <th>Acc Level</th>
+            <th>Credit</th>
+            <th>Debit</th>
+            <th>Balance</th>
+        </tr>
+    </thead>
+    @for (var i = 0; i < Model.treeList.Count; i++)
+    {
+        <details>
+            @foreach (var head in Model.treeList[i].Header)
+            {
+                <summary>
+                    <tr>
+
+                        <td>@Html.DisplayFor(modelItem => head.AccCode)</td>
+                        <td>@Html.DisplayFor(modelItem => head.Accname)</td>
+                        <td>@Html.DisplayFor(modelItem => head.ParentId)</td>
+                        <td>@Html.DisplayFor(modelItem => head.Acclevel)</td>
+                        <td>@Html.DisplayFor(modelItem => head.cramt)</td>
+                        <td>@Html.DisplayFor(modelItem => head.dramt)</td>
+                        <td>@Html.DisplayFor(modelItem => head.Balance)</td>
+                    </tr>
+                </summary>
+                @for (var j = 0; j < Model.treeList[i].Items.Count; j++)
+                {
+                    <div>
+                        <tr class="nested">
+
+
+                            <td>@Html.DisplayFor(modelItem => Model.treeList[i].Items[j].AccCode)</td>
+                            <td>@Html.DisplayFor(modelItem => Model.treeList[i].Items[j].Accname)</td>
+                            <td>@Html.DisplayFor(modelItem => Model.treeList[i].Items[j].ParentId)</td>
+                            <td>@Html.DisplayFor(modelItem => Model.treeList[i].Items[j].Acclevel)</td>
+                            <td>@Html.DisplayFor(modelItem => Model.treeList[i].Items[j].cramt)</td>
+                            <td>@Html.DisplayFor(modelItem => Model.treeList[i].Items[j].dramt)</td>
+                            <td>@Html.DisplayFor(modelItem => Model.treeList[i].Items[j].Balance)</td>
+                        </tr>
+                    </div>
+
+                }
+
+
+            }
+
+        </details>
+    }
+
+</div>
+<script>
+    var toggler = document.getElementsByClassName("parent");
+    var i;
+
+    for (i = 0; i < toggler.length; i++) {
+        toggler[i].addEventListener("click", function ()
+          toggler[i].parentElement.querySelector(".nested").classList.toggle("active");
+        toggler[i].classList.toggle("caret-down");
+    });
+        }
+</script>

@@ -1,0 +1,190 @@
+﻿@model Account.Models.CombinedAccount;
+@{
+    ViewData["Title"] = "Account Status";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<h1>Account Status</h1>
+
+<!--
+<div>
+    <table class="table" id="TableTree">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Acc Code</th>
+            <th>Acc Name</th>
+            <th>Parent Id</th>
+            <th>Acc Level</th>
+            <th>Credit</th>
+            <th>Debit</th>
+            <th>Balance</th>
+        </tr>
+    </thead>
+    
+        @for (var i =0; i < Model.treeList.Count; i++)
+        {
+
+            @for (var f = 0; f < Model.treeList[i].Header.Count; f++)
+            {
+
+                <tbody class="parent">
+                <tr>
+                    <td><span class="caret"></span></td>
+                        <td>@Html.DisplayFor(modelItem => Model.treeList[i].Items[f].AccCode)</td>
+                        <td>@Html.DisplayFor(modelItem => Model.treeList[i].Items[f].Accname)</td>
+                        <td>@Html.DisplayFor(modelItem => Model.treeList[i].Items[f].ParentId)</td>
+                        <td>@Html.DisplayFor(modelItem => Model.treeList[i].Items[f].Acclevel)</td>
+                        <td>@Html.DisplayFor(modelItem => Model.treeList[i].Items[f].cramt)</td>
+                        <td>@Html.DisplayFor(modelItem => Model.treeList[i].Items[f].dramt)</td>
+                        <td>@Html.DisplayFor(modelItem => Model.treeList[i].Items[f].Balance)</td>
+                </tr>
+             
+                
+                    @for (var j = 0; j < Model.treeList[i].Items.Count; j++)
+                    {
+
+                        <tr class="nested">
+                            <td>@Html.DisplayFor(modelItem => Model.treeList[i].Items[j].AccCode)</td>
+                            <td>@Html.DisplayFor(modelItem => Model.treeList[i].Items[j].Accname)</td>
+                            <td>@Html.DisplayFor(modelItem => Model.treeList[i].Items[j].ParentId)</td>
+                            <td>@Html.DisplayFor(modelItem => Model.treeList[i].Items[j].Acclevel)</td>
+                            <td>@Html.DisplayFor(modelItem => Model.treeList[i].Items[j].cramt)</td>
+                            <td>@Html.DisplayFor(modelItem => Model.treeList[i].Items[j].dramt)</td>
+                            <td>@Html.DisplayFor(modelItem => Model.treeList[i].Items[j].Balance)</td>
+                    </tr>
+                    }
+                </tbody>
+
+            }
+        }
+        
+</table>
+</div>
+-->
+
+<div>
+    <ul class="data-display">
+        <li class="header">
+            <span class="head-caret"></span>
+            <span class="head">Acc Code</span>
+            <span class="head">Acc Name</span>
+            <span class="head">Parent Id</span>
+            <span class="head">Acc Level</span>
+            <span class="head">Credit</span>
+            <span class="head">Debit</span>
+            
+            <span class="head">Balance</span>
+        </li>
+    </ul>
+
+    @for (var i = 0; i < Model.treeList.Count; i++)
+    {
+
+        for (var f = 0; f < Model.treeList[i].Header.Count; f++)
+        {
+            
+            <ul class="parent-list">
+                   <li class="row">
+                    <span class="caret caretit head-caret"></span>
+                    <span class="head">@Html.DisplayFor(modelItem => Model.treeList[i].Header[f].AccCode)</span>
+                    <span class="head">@Html.DisplayFor(modelItem => Model.treeList[i].Header[f].Accname)</span>
+                    <span class="head">@Html.DisplayFor(modelItem => Model.treeList[i].Header[f].ParentId)</span>
+                    <span class="head">@Html.DisplayFor(modelItem => Model.treeList[i].Header[f].Acclevel)</span>
+                    <span class="head">@Html.DisplayFor(modelItem => modelItem.treeList[i].Header[f].cramt)</span>
+                    <span class="head">@Html.DisplayFor(modelItem => Model.treeList[i].Header[f].dramt)</span>
+                   
+                    <span class="head">@Html.DisplayFor(modelItem => modelItem.treeList[i].Header[f].Balance)</span>
+
+                <ul class="nested">
+                @for (var j = 0; j < Model.treeList[i].Items.Count; j++)
+                {
+
+                    <li class="row-in-ul">
+                        <span class="data">@Html.DisplayFor(modelItem => Model.treeList[i].Items[j].AccCode)</span>
+                        <span class="data">@Html.DisplayFor(modelItem => Model.treeList[i].Items[j].Accname)</span>
+                        <span class="data">@Html.DisplayFor(modelItem => Model.treeList[i].Items[j].ParentId)</span>
+                        <span class="data">@Html.DisplayFor(modelItem => Model.treeList[i].Items[j].Acclevel)</span>
+                        <span class="data">@Html.DisplayFor(modelItem => Model.treeList[i].Items[j].cramt)</span>
+                        <span class="data">@Html.DisplayFor(modelItem => Model.treeList[i].Items[j].dramt)</span>
+                        
+                        <span class="data">@Html.DisplayFor(modelItem => Model.treeList[i].Items[j].Balance)</span>
+                    </li>
+                }
+                </ul>
+                </li>
+            </ul>
+
+        }
+    }
+</div>
+
+<script>
+
+    var toggler = document.getElementsByClassName('caret');
+    //var caretit = document.getElementsByClassName('caretit');
+    var caretDown = document.querySelectorAll('.caret-down')
+    var caretDowns = document.getElementsByClassName('caret-down');
+
+    var active = document.querySelectorAll('.active')
+    var actives = document.getElementsByClassName('active');
+
+    //if (caretit.length == toggler.length) {
+        for(var i =0; i<toggler.length; i++) {
+            toggler[i].addEventListener("click", function () {
+
+            console.log("actives " + actives.length)
+            console.log("active" + active.length)
+            console.log("caretDown" + caretDown.length)
+            console.log("caretDowns" + caretDowns.length)
+                /*
+                for (var v =0; v <caretDown.length; v++) {
+                    caretDown[v].classList.toggle('caret')
+                }*/
+            
+                for (var v = 0; v < caretDowns.length; v++) {
+                    caretDowns[v].classList.remove('caret-down')
+                    console.log("cartdown removed")
+                }
+                /*
+                for (var v = 0; v < active.length; v++) {
+                    active[v].classList.toggle('nested')
+                }
+                */
+                if (this.parentElement.querySelector(".active") == null) {
+                var activeCount = this.parentElement.querySelector(".active")
+                console.log("ActiveCount" +activeCount)
+                    for (var v = 0; v < actives.length; v++) {
+                        actives[v].classList.remove('active')
+                        console.log("active removed")
+                    }
+                }
+            
+               /*
+                if (this.parentElement.querySelector(".active")){
+                    this.parentElement.querySelector(".active").classList.remove("active")
+                    console.log("active removed")
+                }*/
+            
+                this.parentElement.querySelector(".nested").classList.toggle("active")
+                    console.log("toggled to active")
+            this.classList.toggle("caret-down");
+            this.classList.remove("caret")
+                console.log("element number: " +i);
+            }
+            )
+        }
+        /*
+    } else {
+        for (var i = 0; i < actives.length; i++) {
+        
+            caretDowns[i].addEventListener("click", function () {
+                this.parentElement.querySelector(".active").classList.toggle("nested")
+                this.parentElement.querySelector(".active").classList.remove("active")
+                this.classList.toggle("caret");
+                console.log("caretdown and active removed")
+            }
+            )
+        }
+    }*/
+    
+</script>

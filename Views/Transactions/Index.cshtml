@@ -1,0 +1,67 @@
+﻿
+
+@model Account.Models.CombinedAccount;
+@{
+    ViewData["Title"] = "Account Transactions";
+}
+
+<h1>Individual Transactions</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.COA[0].AccCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.COA[0].Accname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.COA[0].ParentId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.COA[0].Acclevel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Voucher[0].cramt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Voucher[0].dramt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Balance)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.Status)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Accname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ParentId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Acclevel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cramt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dramt)
+                </td>
+                <td style="font-weight:bold;">
+                    @Html.DisplayFor(modelItem => item.Balance)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Account.Models.Voucher>
+
+@{
+    ViewData["Title"] = "Voucher Detail";
+}
+
+<h1>Voucher Detail</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.voucherdate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.voucherno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.verified)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.crcoacode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.crcoaname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cramt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.drcoacode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.drcoaname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dramt)
+            </th>
+            
+            <th></th>
+            
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.voucherdate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.voucherno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.verified)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.crcoacode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.crcoaname)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.cramt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.drcoacode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.drcoaname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dramt)
+            </td>
+            
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+            </td>
+               
+        </tr>
+}
+    </tbody>
+</table>
